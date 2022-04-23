@@ -6,6 +6,8 @@
     <%= link_to fa_icon('pencil'), edit_question_path(@question), title: 'Edit question' %>
     <% unless @question.hidden? %>
       <%= button_to fa_icon('eye-slash'), hide_question_path(@question), method: :patch, title: 'Hide question', form: { data: { turbo_confirm: 'Are you sure you wanna hide the question?' } } %>
+    <% else %>
+      <%= button_to fa_icon('eye'), hide_question_path(@question), method: :patch, title: 'Reveal question', form: { data: { turbo_confirm: 'Are you sure you wanna make the question visible?' } } %>
     <% end %>
     <%= button_to fa_icon('trash-o'), question_path(@question), method: :delete, title: 'Delete question', form: { data: { turbo_confirm: 'Are you sure you wanna delete the question?' } } %>
   </div>
