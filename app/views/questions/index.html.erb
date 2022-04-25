@@ -12,6 +12,6 @@
 
 <% @questions.each do |question| %>
   <div class="mt-sm container">
-    <%= render question %>
+    <%= render 'question', question: question %>
   </div>
 <% end %>
