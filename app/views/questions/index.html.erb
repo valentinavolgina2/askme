@@ -7,7 +7,10 @@
 </div>
 
 <div class="container mt-sm">
-  <h2 class="title-lg">All questions</h2>
+  <h2 class="title-lg">
+    <%= @questions.count %>
+    <%= pluralize(@questions.count, 'question', 'questions') %>
+  </h2>
 </div>
 
 <% @questions.each do |question| %>
