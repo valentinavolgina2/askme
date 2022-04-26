@@ -1,4 +1,4 @@
-<%= form_with model: question do |form| %>
+<%= form_with model: question, data: {turbo: false} do |form| %>
   <p class="mt"><%= form.label :body, 'Your question' %></p>
   <p class="mt"><%= form.text_area :body, rows: 5, class: 'form-text-area' %></p>
   <p class="mt"><%= form.label :user_id %></p>

@@ -2,15 +2,27 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: %i[show edit update destroy hide]
 
   def create
-    @question = Question.create(question_params)
+    @question = Question.new(question_params)
 
-    redirect_to question_path(@question), notice: 'Created a new question!'
+    if @question.save
+      redirect_to question_path(@question), notice: 'Created a new question!'
+    else
+      flash.now[:alert] = 'Some of the fields are incorrect!'
+
+      render :new
+    end
   end
 
   def update
-    @question.update(question_params)
+    @question = Question.find(params[:id])
 
-    redirect_to question_path(@question), notice: 'Saved the question!'
+    if @question.update(question_params)
+      redirect_to question_path(@question), notice: 'Saved the question!'
+    else
+      flash.now[:alert] = 'Some of the fields are incorrect!'
+
+      render :edit
+    end
   end
 
   def destroy
