@@ -31,6 +31,10 @@ a.hidden {
   color: #a0a0a0;
 }
 
+.text-red {
+  color: #e80312;
+}
+
 .text-bold {
   font-weight: bold;
 }
