@@ -1,4 +1,4 @@
-.form-text-field, .form-text-area {
+.form-text-field, .form-text-area, .form-color-field {
   border: 1px solid #d0d0d0;
   padding: 7.5px 10px;
 }
@@ -15,3 +15,8 @@
   width: 100%;
 }
 
+.form-color-field {
+  cursor: pointer;
+  padding: 0;
+  width: 100px;
+}
