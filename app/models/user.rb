@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  VALID_NICKNAME_REGEX = /\A[0-9a-z_]+\z/
+
   has_secure_password
 
   before_validation :downcase_nickname
@@ -6,7 +8,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates_with EmailAddress::ActiveRecordValidator, field: :email
   validates :nickname, uniqueness: true, presence: true, length: { maximum: 40 },
-            format: { with: /\A[0-9a-z_]+\z/, message: 'only allows Latin characters, numbers, and underscore' }
+            format: { with: VALID_NICKNAME_REGEX }
 
   def downcase_nickname
     nickname.downcase!
