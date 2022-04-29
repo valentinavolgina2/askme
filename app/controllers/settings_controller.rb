@@ -3,6 +3,7 @@ class SettingsController < ApplicationController
 
   def new
     @setting = Setting.new
+    @setting.navbar_color = navbar_color
   end
 
   def create
