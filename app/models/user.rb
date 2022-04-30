@@ -13,4 +13,8 @@ class User < ApplicationRecord
   def downcase_nickname
     nickname.downcase!
   end
+
+  def settings
+    Setting.find_by(user_id: id)
+  end
 end

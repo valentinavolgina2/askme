@@ -3,22 +3,33 @@ class SettingsController < ApplicationController
 
   def new
     @setting = Setting.new
-    @setting.navbar_color = navbar_color
   end
 
   def create
-    Setting.create(setting_params)
+    @setting = Setting.new(setting_params)
 
-    redirect_to root_path, notice: 'Settings have been created!'
+    if @setting.save
+      redirect_to root_path, notice: 'Settings have been created!'
+    else
+      flash.now[:alert] = 'Some of the fields are incorrect!'
+
+      render :new
+    end
   end
 
   def edit
   end
 
   def update
-    @setting.update(setting_params)
+    @setting = Setting.find(params[:id])
 
-    redirect_to root_path, notice: 'Settings have been updated!'
+    if @setting.update(setting_params)
+      redirect_to root_path, notice: 'Settings have been updated!'
+    else
+      flash.now[:alert] = 'An error occurred during saving!'
+
+      render :edit
+    end
   end
 
   def destroy

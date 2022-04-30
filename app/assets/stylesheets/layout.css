@@ -1,5 +1,5 @@
 body {
-  background: #03071e;
+  background: #e6e6e6;
   display: flex;
   justify-content: center;
 }
@@ -20,7 +20,7 @@ body {
 
 .navbar {
   align-items: center;
-  background-color: #370617;
+  background-color: #ff00ff;
   color: white;
   display: flex;
   justify-content: space-between;

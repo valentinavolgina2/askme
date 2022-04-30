@@ -12,12 +12,12 @@
 
   <body>
     <div class="wrapper">
-      <div class="navbar" style="background-color: <%= navbar_color %>">
+      <div class="navbar" style="<%= navbar_color_style(current_user) %>" >
         <div>
           <%= link_to 'Ask me!', root_path, class: 'title-sm text-bold' %>
           <% if current_user.present? %>
-            <% if user_setting.present? %>
-              <%= link_to fa_icon('gear'), edit_setting_path(user_setting), title: 'Edit settings', class: 'title-sm ml-sm' %>
+            <% if current_user.settings.present? %>
+              <%= link_to fa_icon('gear'), edit_setting_path(current_user.settings), title: 'Edit settings', class: 'title-sm ml-sm' %>
             <% else %>
               <%= link_to fa_icon('gear'), new_setting_path, title: 'Add settings', class: 'title-sm ml-sm' %>
             <% end %>
