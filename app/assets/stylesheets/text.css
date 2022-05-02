@@ -11,6 +11,14 @@ a.hidden {
   opacity: 50%;
 }
 
+.title-question {
+  font-family: 'Akronim', cursive;
+  font-size: 250px;
+  background: -webkit-linear-gradient(#ffba08, #ff00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .title-lg {
   font-size: 175%;
 }
@@ -45,4 +53,8 @@ a.hidden {
 
 .ws-pre-line {
   white-space: pre-line;
+}
+
+.text-center {
+  text-align: center;
 }

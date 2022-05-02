@@ -11,18 +11,24 @@
 </div>
 
 <div class="container">
-  <%= link_to "Ask me", new_question_path(user_id: @user.id), class: 'button button-yellow' %>
-
   <p class="mt">
     <%= render 'questions/form', question: @question %>
   </p>
 </div>
 
 <div class="container mt-sm">
-  <h2 class="title-lg">
-    <%= @questions.count %>
-    <%= pluralize(@questions.count, 'question', 'questions') %>
-  </h2>
+    <% if @questions.count == 0 %>
+      <div class="text-center mt-lg mb-lg">
+        <p class="title-question mt">?</p>
+        <h2 class="title-md text-grey">I haven't been asked any questions yet</h2>
+        <%= link_to "Ask me", new_question_path(user_id: @user.id), class: 'button button-yellow mt' %>
+      </div>
+    <% else %>
+      <h2 class="title-lg">
+        <%= @questions.count %>
+        <%= pluralize(@questions.count, 'question', 'questions') %>
+      </h2>
+    <% end %>
 </div>
 
 <% @questions.each do |question| %>
