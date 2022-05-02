@@ -1,11 +1,14 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: %i[show edit update destroy hide]
+  before_action :ensure_current_user, only: %i[update destroy edit hide]
+  before_action :set_question_for_current_user, only: %i[update destroy edit hide]
 
   def create
+    question_params = params.require(:question).permit(:body, :user_id)
+
     @question = Question.new(question_params)
 
     if @question.save
-      redirect_to question_path(@question), notice: 'Created a new question!'
+      redirect_to user_path(@question.user), notice: 'Created a new question!'
     else
       flash.now[:alert] = 'Some of the fields are incorrect!'
 
@@ -14,10 +17,12 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    question_params = params.require(:question).permit(:body, :answer)
+
     @question = Question.find(params[:id])
 
     if @question.update(question_params)
-      redirect_to question_path(@question), notice: 'Saved the question!'
+      redirect_to user_path(@question.user), notice: 'Saved the question!'
     else
       flash.now[:alert] = 'Some of the fields are incorrect!'
 
@@ -26,12 +31,14 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    @user = @question.user
     @question.destroy
 
-    redirect_to questions_path, notice: 'Question has been deleted!'
+    redirect_to user_path(@user), notice: 'Question has been deleted!'
   end
 
   def show
+    @question = Question.find(params[:id])
   end
 
   def index
@@ -40,7 +47,8 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
+    @user = User.find(params[:user_id])
+    @question = Question.new(user: @user)
   end
 
   def edit
@@ -54,11 +62,11 @@ class QuestionsController < ApplicationController
 
   private
 
-  def question_params
-    params.require(:question).permit(:body, :user_id)
+  def ensure_current_user
+    redirect_with_alert unless current_user.present?
   end
 
-  def set_question
-    @question = Question.find(params[:id])
+  def set_question_for_current_user
+    @question = current_user.questions.find(params[:id])
   end
 end

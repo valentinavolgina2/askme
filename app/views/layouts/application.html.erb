@@ -26,7 +26,7 @@
 
         <div>
           <% if current_user.present? %>
-            <%= content_tag 'span', display_nickname(current_user), class: 'mr-sm' %>
+            <%= link_to display_nickname(current_user), user_path(current_user),class: 'mr-sm' %>
             <%= button_to 'Log out', session_path, method: :delete, class: 'button button-yellow' %>
           <% else %>
             <%= link_to 'Register', new_user_path, class: 'button button-yellow mr-sm' %>

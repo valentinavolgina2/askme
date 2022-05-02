@@ -10,6 +10,8 @@ class User < ApplicationRecord
   validates :nickname, uniqueness: true, presence: true, length: { maximum: 40 },
             format: { with: VALID_NICKNAME_REGEX }
 
+  has_many :questions, dependent: :delete_all
+
   def downcase_nickname
     nickname.downcase!
   end
