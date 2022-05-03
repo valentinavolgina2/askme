@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_many :owned_questions, class_name: 'Question', foreign_key: :author_id, dependent: :delete_all
   has_one :setting
 
+  include Gravtastic
+  gravtastic(secure: true, filetype: :png, size: 100, default: 'robohash')
+
   def downcase_nickname
     nickname.downcase!
   end
