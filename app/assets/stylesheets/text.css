@@ -7,6 +7,10 @@ a, button {
   color: #dc2f02;
 }
 
+a {
+  text-decoration: none;
+}
+
 a.hidden {
   opacity: 50%;
 }

@@ -1,6 +1,12 @@
-<div class="mb-sm ws-pre-line">
-  <%= question.body %>
+<div class="mb-sm text-sm">
+  <% if question.author == current_user %>
+    <p class="text-grey">From me</p>
+  <% else %>
+    <%= link_to "From #{display_nickname(question.author)}", user_path(question.author),class: 'text-grey' %>
+  <% end %>
 </div>
+
+<div class="mb-sm ws-pre-line"><%= question.body %></div>
 
 <% if question.answer.present? %>
   <div class="mb-sm text-dark-red">

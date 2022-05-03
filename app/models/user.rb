@@ -10,7 +10,8 @@ class User < ApplicationRecord
   validates :nickname, uniqueness: true, presence: true, length: { maximum: 40 },
             format: { with: VALID_NICKNAME_REGEX }
 
-  has_many :questions, dependent: :delete_all
+  has_many :asked_questions, class_name: 'Question', foreign_key: :user_id, dependent: :delete_all
+  has_many :owned_questions, class_name: 'Question', foreign_key: :author_id, dependent: :delete_all
 
   def downcase_nickname
     nickname.downcase!
@@ -18,5 +19,13 @@ class User < ApplicationRecord
 
   def settings
     Setting.find_by(user_id: id)
+  end
+
+  def asked_questions
+    Question.where("user_id = ?", self.id)
+  end
+
+  def owned_questions
+    Question.where("author_id = ?", self.id)
   end
 end

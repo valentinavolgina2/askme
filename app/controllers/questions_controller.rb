@@ -1,11 +1,12 @@
 class QuestionsController < ApplicationController
-  before_action :ensure_current_user, only: %i[update destroy edit hide]
+  before_action :ensure_current_user, only: %i[create update destroy edit hide]
   before_action :set_question_for_current_user, only: %i[update destroy edit hide]
 
   def create
     question_params = params.require(:question).permit(:body, :user_id)
 
     @question = Question.new(question_params)
+    @question.author = current_user
 
     if @question.save
       redirect_to user_path(@question.user), notice: 'Created a new question!'
@@ -67,6 +68,6 @@ class QuestionsController < ApplicationController
   end
 
   def set_question_for_current_user
-    @question = current_user.questions.find(params[:id])
+    @question = current_user.asked_questions.find(params[:id])
   end
 end
