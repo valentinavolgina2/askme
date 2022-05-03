@@ -3,7 +3,7 @@
     <p><%= form.label :navbar_color, 'Navbar color' %></p>
     <p><%= form.color_field :navbar_color, class: 'form-color-field' %></p>
 
-    <%= form.hidden_field :user_id, value: current_user.id %>
+    <%= form.hidden_field :user_id %>
 
     <p class="mt-lg">
       <%= form.submit 'Save', class: 'button button-main' %>

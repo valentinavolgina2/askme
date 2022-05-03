@@ -12,13 +12,10 @@ class User < ApplicationRecord
 
   has_many :asked_questions, class_name: 'Question', foreign_key: :user_id, dependent: :delete_all
   has_many :owned_questions, class_name: 'Question', foreign_key: :author_id, dependent: :delete_all
+  has_one :setting
 
   def downcase_nickname
     nickname.downcase!
-  end
-
-  def settings
-    Setting.find_by(user_id: id)
   end
 
   def asked_questions

@@ -1,11 +1,14 @@
 class SettingsController < ApplicationController
+  before_action :ensure_current_user, only: %i[create update destroy edit new]
   before_action :set_setting, only: %i[edit update destroy]
 
   def new
-    @setting = Setting.new
+    @user = User.find(params[:user_id])
+    @setting = Setting.new(user: @user)
   end
 
   def create
+    setting_params = params.require(:setting).permit(:navbar_color, :user_id)
     @setting = Setting.new(setting_params)
 
     if @setting.save
@@ -21,6 +24,8 @@ class SettingsController < ApplicationController
   end
 
   def update
+    setting_params = params.require(:setting).permit(:navbar_color)
+
     @setting = Setting.find(params[:id])
 
     if @setting.update(setting_params)
@@ -40,8 +45,8 @@ class SettingsController < ApplicationController
 
   private
 
-  def setting_params
-    params.require(:setting).permit(:navbar_color, :user_id)
+  def ensure_current_user
+    redirect_with_alert unless current_user.present?
   end
 
   def set_setting
