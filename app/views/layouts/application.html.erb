@@ -28,7 +28,7 @@
           <% end %>
         </div>
 
-        <div>
+        <div class="text-right">
           <% if current_user.present? %>
             <%= link_to display_nickname(current_user), user_path(current_user),class: 'mr-sm' %>
             <%= button_to 'Log out', session_path, method: :delete, class: 'button button-yellow' %>
