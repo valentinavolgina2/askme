@@ -1,0 +1,5 @@
+<% if user == current_user %>
+  me
+<% else %>
+  <%= link_to "#{display_nickname(user)}", user_path(user) %>
+<% end %>
