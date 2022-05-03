@@ -17,6 +17,10 @@ class User < ApplicationRecord
   include Gravtastic
   gravtastic(secure: true, filetype: :png, size: 100, default: 'robohash')
 
+  def to_param  # overridden
+    nickname
+  end
+
   def downcase_nickname
     nickname.downcase!
   end
