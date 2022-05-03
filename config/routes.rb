@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   resource :session, only: %i[new create destroy]
-  resources :users, except: %i[index]
+  resources :users, param: :nickname, except: %i[index]
   resources :settings
 
   root to: 'questions#index'
