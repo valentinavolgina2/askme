@@ -1,6 +1,9 @@
 <div class="container">
   <h2 class="title-lg mb-sm">New question</h2>
-  <p class="mb">for <%= link_to "@#{@user.nickname}", user_path(@user) %></p>
+  <p class="mb">
+    for <%= render 'questions/user', user: @user %>
+    from <%= render 'questions/user', user: question.author %>
+  </p>
 
   <%= render 'error', question: @question %>
 
