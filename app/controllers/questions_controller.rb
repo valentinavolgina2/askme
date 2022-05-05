@@ -68,6 +68,6 @@ class QuestionsController < ApplicationController
   end
 
   def set_question_for_current_user
-    @question = current_user.asked_questions.find(params[:id])
+    @question = current_user.questions.find(params[:id])
   end
 end
