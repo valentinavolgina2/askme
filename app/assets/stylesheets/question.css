@@ -4,3 +4,8 @@
   justify-content: space-between;
   padding-top: 10px;
 }
+
+.question-tags {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 10px;
+}
