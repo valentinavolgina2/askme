@@ -12,12 +12,14 @@ class Question < ApplicationRecord
   private
 
   def create_hashtags
-    extract_hashtags.each do |name|
+    all_hashtags = extract_hashtags(body) | extract_hashtags(answer)
+
+    all_hashtags.each do |name|
       hashtags.create(name: name)
     end
   end
 
-  def extract_hashtags
-    body.to_s.scan(/#\w+/).map{ |name| name.gsub("#", "") }.reject{ |str| str.nil? || str.strip.empty? }
+  def extract_hashtags(text)
+    text.to_s.scan(/#\w+/).map{ |name| name.gsub("#", "") }.reject{ |str| str.nil? || str.strip.empty? }
   end
 end
