@@ -15,7 +15,7 @@ class Question < ApplicationRecord
     all_hashtags = extract_hashtags(body) | extract_hashtags(answer)
 
     all_hashtags.each do |name|
-      hashtags.create(name: name.downcase)
+      hashtags.create(name: name.downcase) unless QuestionHashtag.tag_present(id, name.downcase)
     end
   end
 
