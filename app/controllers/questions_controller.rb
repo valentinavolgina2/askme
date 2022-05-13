@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :ensure_current_user, only: %i[update destroy edit hide]
   before_action :set_question_for_current_user, only: %i[update destroy edit hide]
+  before_action :set_recently_joined_users, only: %i[index search]
 
   def create
     question_params = params.require(:question).permit(:body, :user_id)
@@ -44,7 +45,6 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.order(created_at: :desc).last(10)
-    @users = User.order(created_at: :desc).last(10)
   end
 
   def new
@@ -61,6 +61,13 @@ class QuestionsController < ApplicationController
     redirect_to question_path(@question)
   end
 
+  def search
+    tag  = params[:tag]
+    @questions = Question.joins(:hashtags).where(hashtags: {name: tag})
+
+    render :index
+  end
+
   private
 
   def ensure_current_user
@@ -69,5 +76,9 @@ class QuestionsController < ApplicationController
 
   def set_question_for_current_user
     @question = current_user.questions.find(params[:id])
+  end
+
+  def set_recently_joined_users
+    @users = User.order(created_at: :desc).last(10)
   end
 end

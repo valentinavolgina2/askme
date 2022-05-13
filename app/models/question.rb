@@ -20,6 +20,6 @@ class Question < ApplicationRecord
   end
 
   def extract_hashtags(text)
-    text.to_s.scan(/#\w+/).map{ |name| name.gsub("#", "") }.reject{ |str| str.nil? || str.strip.empty? }
+    text.to_s.scan(/#[[:word:]-]+/).map{ |name| name.gsub("#", "") }.reject{ |str| str.nil? || str.strip.empty? }
   end
 end

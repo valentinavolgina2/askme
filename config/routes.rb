@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/questions/search', to: 'questions#search', as: 'search', param: :tag
+
   resources :questions do
     member do
       patch 'hide'
