@@ -6,4 +6,18 @@ class Question < ApplicationRecord
 
   has_many :question_hashtags
   has_many :hashtags, through: :question_hashtags
+
+  after_commit :create_hashtags, on: [:create, :update]
+
+  private
+
+  def create_hashtags
+    extract_hashtags.each do |name|
+      hashtags.create(name: name)
+    end
+  end
+
+  def extract_hashtags
+    body.to_s.scan(/#\w+/).map{ |name| name.gsub("#", "") }.reject{ |str| str.nil? || str.strip.empty? }
+  end
 end
