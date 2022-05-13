@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
   before_action :ensure_current_user, only: %i[update destroy edit hide]
   before_action :set_question_for_current_user, only: %i[update destroy edit hide]
   before_action :set_recently_joined_users, only: %i[index search]
+  before_action :set_hashtags, only: %i[index search]
 
   def create
     question_params = params.require(:question).permit(:body, :user_id)
@@ -80,5 +81,9 @@ class QuestionsController < ApplicationController
 
   def set_recently_joined_users
     @users = User.order(created_at: :desc).last(10)
+  end
+
+  def set_hashtags
+    @hashtags = Hashtag.distinct.order(name: :asc).pluck(:name)
   end
 end
