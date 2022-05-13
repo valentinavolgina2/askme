@@ -15,7 +15,7 @@ class Question < ApplicationRecord
     all_hashtags = extract_hashtags(body) | extract_hashtags(answer)
 
     all_hashtags.each do |name|
-      hashtags.create(name: name)
+      hashtags.create(name: name.downcase)
     end
   end
 
