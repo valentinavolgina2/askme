@@ -1,4 +1,6 @@
 class Question < ApplicationRecord
+  VALID_HASHTAG_REGEX = /#[[:word:]-]+/
+
   validates :body, presence: true, length: { maximum: 280 }
 
   belongs_to :user
@@ -7,19 +9,15 @@ class Question < ApplicationRecord
   has_many :question_hashtags, dependent: :destroy
   has_many :hashtags, through: :question_hashtags
 
-  after_commit :create_hashtags, on: [:create, :update]
+  after_save_commit :create_hashtags
 
   private
 
   def create_hashtags
-    all_hashtags = extract_hashtags(body) | extract_hashtags(answer)
-
-    all_hashtags.each do |name|
-      hashtags.create(name: name.downcase) unless hashtags.exists?(name: name.downcase)
-    end
+    self.hashtags = extract_hashtags(body + answer).map { |tag| Hashtag.find_or_create_by(name: tag.downcase) }.uniq
   end
 
   def extract_hashtags(text)
-    text.to_s.scan(/#[[:word:]-]+/).map{ |name| name.gsub("#", "") }.reject{ |str| str.nil? || str.strip.empty? }
+    text.scan(VALID_HASHTAG_REGEX).map{ |name| name.gsub("#", "") }
   end
 end
