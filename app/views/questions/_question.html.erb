@@ -5,11 +5,14 @@
     from <%= render 'questions/user', user: question.author %>
   </p>
 </div>
-<div class="mb-sm ws-pre-line"><%= question.body %></div>
+
+<div id="q" class="mb-sm ws-pre-line hashtag-text">
+  <%= replace_tags_with_links(question.body) %>
+</div>
 
 <% if question.answer.present? %>
-  <div class="mb-sm text-dark-red">
-    <%= (question.answer) %>
+  <div class="mb-sm text-dark-red hashtag-text">
+    <%= replace_tags_with_links(question.answer) %>
   </div>
 <% end %>
 
