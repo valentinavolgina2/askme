@@ -16,7 +16,7 @@
 <% if question.hashtags.any? %>
   <div class="mb-sm text-sm question-tags">
     <% question.hashtags.each do |hashtag| %>
-      <%= link_to "##{hashtag.name}", search_path(tag: hashtag.name) %>
+      <%= link_to "##{hashtag.name}", search_questions_path(tag: hashtag.name) %>
     <% end %>
   </div>
 <% end %>
