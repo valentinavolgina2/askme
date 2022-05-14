@@ -10,11 +10,13 @@
   </div>
 </div>
 
-<div class="container mt-sm">
-  <% @hashtags.each do |hashtag_name| %>
-    <%= link_to "##{hashtag_name}", search_questions_path(tag: hashtag_name) %>
-  <% end %>
-</div>
+<% if @hashtags.any? %>
+  <div class="container mt-sm">
+    <% @hashtags.each do |hashtag_name| %>
+      <%= link_to "##{hashtag_name}", search_questions_path(tag: hashtag_name) %>
+    <% end %>
+  </div>
+<% end %>
 
 <div class="container mt-sm">
   <h2 class="title-lg">

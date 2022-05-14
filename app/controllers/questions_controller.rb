@@ -65,6 +65,7 @@ class QuestionsController < ApplicationController
   def search
     tag  = params[:tag]
     @questions = Question.joins(:hashtags).where(hashtags: {name: tag})
+    @hashtags.select! { |name| name == tag}
 
     render :index
   end
