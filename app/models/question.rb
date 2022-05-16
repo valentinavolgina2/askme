@@ -12,7 +12,7 @@ class Question < ApplicationRecord
   private
 
   def create_hashtags
-    self.hashtags = extract_hashtags("#{body} #{answer || ""}").map { |tag| Hashtag.find_or_create_by(name: tag.gsub("#", "")) }
+    self.hashtags = extract_hashtags("#{body} #{answer || ""}").map { |tag| Hashtag.create_or_find_by(name: tag.gsub("#", "")) }
   end
 
   def extract_hashtags(text)
