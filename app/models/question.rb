@@ -1,6 +1,4 @@
 class Question < ApplicationRecord
-  VALID_HASHTAG_REGEX = /#[[:word:]-]+/
-
   validates :body, presence: true, length: { maximum: 280 }
 
   belongs_to :user
@@ -18,6 +16,6 @@ class Question < ApplicationRecord
   end
 
   def extract_hashtags(text)
-    text.downcase.scan(VALID_HASHTAG_REGEX).uniq
+    text.downcase.scan(Hashtag::VALID_HASHTAG_REGEX).uniq
   end
 end
