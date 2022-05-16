@@ -48,10 +48,4 @@
       <%= yield %>
     </div>
   </body>
-
-  <script>
-    document.querySelectorAll('.hashtag-text').forEach(div => {
-        div.innerHTML = div.innerHTML.replaceAll('&lt;', '<').replaceAll('&gt;', '>')
-    })
-  </script>
 </html>
