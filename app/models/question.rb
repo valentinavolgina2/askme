@@ -14,10 +14,10 @@ class Question < ApplicationRecord
   private
 
   def create_hashtags
-    self.hashtags = extract_hashtags(body + " " + answer).map { |tag| Hashtag.find_or_create_by(name: tag.downcase) }.uniq
+    self.hashtags = extract_hashtags("#{body} #{answer || ""}").map { |tag| Hashtag.find_or_create_by(name: tag.gsub("#", "")) }
   end
 
   def extract_hashtags(text)
-    text.scan(VALID_HASHTAG_REGEX).map{ |name| name.gsub("#", "") }
+    text.downcase.scan(VALID_HASHTAG_REGEX).uniq
   end
 end
