@@ -7,12 +7,12 @@
 </div>
 
 <div id='q' class='mb-sm ws-pre-line hashtag-text'>
-  <%= sanitize replace_tags_with_links(question.body), tags: %w(a), attributes: %w(href) %>
+  <%= sanitize replace_tags_with_links(question.body), tags: %w[a], attributes: %w(href) %>
 </div>
 
 <% if question.answer.present? %>
   <div class='mb-sm text-dark-red hashtag-text'>
-    <%= sanitize replace_tags_with_links(question.answer), tags: %w(a), attributes: %w(href) %>
+    <%= sanitize replace_tags_with_links(question.answer), tags: %w[a], attributes: %w(href) %>
   </div>
 <% end %>
 

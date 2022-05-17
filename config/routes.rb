@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :questions do
     get :search, on: :collection, param: :tag
     member do
-      patch 'hide'
+      patch :hide
     end
   end
 
