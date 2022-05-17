@@ -10,7 +10,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.author = current_user
 
-    if @question.save
+    if check_captcha(@question) && @question.save
       redirect_to user_path(@question.user), notice: 'Created a new question!'
     else
       flash.now[:alert] = 'Some of the fields are incorrect!'
@@ -86,5 +86,9 @@ class QuestionsController < ApplicationController
 
   def set_hashtags
     @hashtags = Hashtag.order(:name).pluck(:name)
+  end
+
+  def check_captcha(model)
+    current_user.present? || verify_recaptcha(model: model)
   end
 end

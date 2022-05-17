@@ -1,13 +1,15 @@
 <%= form_with model: question, data: {turbo: false} do |form| %>
   <%= form.hidden_field :user_id %>
 
-  <p class='mt'><%= form.label :body, 'Your question' %></p>
-  <p class='mt'><%= form.text_area :body, rows: 5, class: 'form-text-area' %></p>
+  <p class='my'><%= form.label :body, 'Your question' %></p>
+  <p class='mb'><%= form.text_area :body, rows: 5, class: 'form-text-area' %></p>
 
   <% if question.persisted? %>
-    <p class='mt'><%= form.label :answer, 'Answer' %></p>
-    <p class='mt'><%= form.text_area :answer, rows: 5, class: 'form-text-area' %></p>
+    <p class='my'><%= form.label :answer, 'Answer' %></p>
+    <p class='mb'><%= form.text_area :answer, rows: 5, class: 'form-text-area' %></p>
   <% end %>
+
+  <%= recaptcha_tags unless current_user.present? %>
 
   <p class='mt'><%= form.submit 'Save', class: 'button button-main' %> or <%= link_to 'Back', :back %></p>
 <% end %>
