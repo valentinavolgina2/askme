@@ -2,21 +2,21 @@
 <html>
   <head>
     <title>Askme</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name='viewport' content='width=device-width,initial-scale=1'>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
     <%= javascript_importmap_tags %>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Akronim&display=swap" rel="stylesheet">
+    <link rel='preconnect' href='https://fonts.googleapis.com'>
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+    <link href='https://fonts.googleapis.com/css2?family=Akronim&display=swap' rel='stylesheet'>
   </head>
 
   <body>
-    <div class="wrapper">
-      <div class="navbar" style="<%= navbar_color_style(current_user) %>" >
+    <div class='wrapper'>
+      <div class='navbar' style='<%= navbar_color_style(current_user) %>' >
         <div>
           <%= link_to 'Ask me!', root_path, class: 'title-sm text-bold' %>
           <% if current_user.present? %>
@@ -28,7 +28,7 @@
           <% end %>
         </div>
 
-        <div class="text-right">
+        <div class='text-right'>
           <% if current_user.present? %>
             <%= link_to display_nickname(current_user), user_path(current_user),class: 'mr-sm' %>
             <%= button_to 'Log out', session_path, method: :delete, class: 'button button-yellow' %>
@@ -40,9 +40,9 @@
       </div>
 
       <% if flash[:notice].present? %>
-        <p class="mb mt message message-notice"><%= flash[:notice] %></p>
+        <p class='mb mt message message-notice'><%= flash[:notice] %></p>
       <% elsif flash[:alert].present? %>
-        <p class="mb mt message message-alert"><%= flash[:alert] %></p>
+        <p class='mb mt message message-alert'><%= flash[:alert] %></p>
       <% end %>
 
       <%= yield %>

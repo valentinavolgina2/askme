@@ -1,31 +1,31 @@
-<div class="mb">
-  <p class="text-sm text-grey">
+<div class='mb'>
+  <p class='text-sm text-grey'>
     Question <%= link_to "##{question.id}", question_path(question) %>
     for <%= render 'questions/user', user: question.user %>
     from <%= render 'questions/user', user: question.author %>
   </p>
 </div>
 
-<div id="q" class="mb-sm ws-pre-line hashtag-text">
+<div id='q' class='mb-sm ws-pre-line hashtag-text'>
   <%= sanitize replace_tags_with_links(question.body), tags: %w(a), attributes: %w(href) %>
 </div>
 
 <% if question.answer.present? %>
-  <div class="mb-sm text-dark-red hashtag-text">
+  <div class='mb-sm text-dark-red hashtag-text'>
     <%= sanitize replace_tags_with_links(question.answer), tags: %w(a), attributes: %w(href) %>
   </div>
 <% end %>
 
 <% if question.hashtags.any? %>
-  <div class="mb-sm text-sm question-tags">
+  <div class='mb-sm text-sm question-tags'>
     <% question.hashtags.each do |hashtag| %>
       <%= link_to "##{hashtag.name}", search_questions_path(tag: hashtag.name) %>
     <% end %>
   </div>
 <% end %>
 
-<div class="text-sm question-footer">
-  <div class="text-grey">
+<div class='text-sm question-footer'>
+  <div class='text-grey'>
     <%= l(question.created_at, format: :short) %>
   </div>
 

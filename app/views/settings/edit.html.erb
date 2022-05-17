@@ -1,9 +1,9 @@
-<div class="container">
-  <h2 class="title">Edit website settings</h2>
+<div class='container'>
+  <h2 class='title'>Edit website settings</h2>
 
   <%= render 'form', setting: @setting %>
 
-  <div class="mt-lg">
+  <div class='mt-lg'>
     <%= button_to 'Delete settings', setting_path(@setting),
                   method: :delete,
                   form: {data: {turbo_confirm: 'Are you sure you wanna delete the settings?'}},

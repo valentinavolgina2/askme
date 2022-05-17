@@ -64,8 +64,8 @@ class QuestionsController < ApplicationController
 
   def search
     tag  = params[:tag]
-    @questions = Question.joins(:hashtags).where(hashtags: {name: tag})
-    @hashtags.select! { |name| name == tag}
+    @questions = Question.joins(:hashtags).where(hashtags: { name: tag })
+    @hashtags.select! { |name| name == tag }
 
     render :index
   end
@@ -85,6 +85,6 @@ class QuestionsController < ApplicationController
   end
 
   def set_hashtags
-    @hashtags = Hashtag.distinct.order(name: :asc).pluck(:name)
+    @hashtags = Hashtag.order(:name).pluck(:name)
   end
 end

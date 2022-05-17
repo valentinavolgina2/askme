@@ -1,47 +1,47 @@
-<div class="container">
-  <h2 class="title">Edit profile</h2>
+<div class='container'>
+  <h2 class='title'>Edit profile</h2>
 
-  <div class="mt">
-    <p><%= image_tag @user.gravatar_url, title: "display_nickname(user)", class: 'rounded' %></p>
-    <p class="text-sm">To add or change your avatar, register on
-      <%= link_to "Gravatar", 'https://gravatar.com' %> and upload a photo</p>
+  <div class='mt'>
+    <p><%= image_tag @user.gravatar_url, title: display_nickname(@user), class: 'rounded' %></p>
+    <p class='text-sm'>To add or change your avatar, register on
+      <%= link_to 'Gravatar', 'https://gravatar.com' %> and upload a photo</p>
   </div>
 
   <% if @user.errors.any? %>
-    <div class="mt">
+    <div class='mt'>
       <% @user.errors.full_messages.each do |message| %>
-        <p class="mb-sm text-red"><%= message %></p>
+        <p class='mb-sm text-red'><%= message %></p>
       <% end %>
     </div>
   <% end %>
 
-  <div class="mt">
+  <div class='mt'>
     <%= form_with model: @user, data: {turbo: false} do |form| %>
       <p><%= form.label :name, 'Your name' %></p>
       <p><%= form.text_field :name, class: 'form-text-field' %></p>
 
-      <p class="mt"><%= form.label :nickname, 'Your nickname on the website' %></p>
+      <p class='mt'><%= form.label :nickname, 'Your nickname on the website' %></p>
       <p><%= form.text_field :nickname, class: 'form-text-field' %></p>
 
-      <p class="mt"><%= form.label :email %></p>
+      <p class='mt'><%= form.label :email %></p>
       <p><%= form.text_field :email, class: 'form-text-field' %></p>
 
-      <p class="mt-lg text-sm">Leave it empty if you don't want to change the password</p>
+      <p class='mt-lg text-sm'>Leave it empty if you don't want to change the password</p>
 
-      <p class="mt"><%= form.label :password %></p>
+      <p class='mt'><%= form.label :password %></p>
       <p><%= form.password_field :password, class: 'form-text-field' %></p>
 
-      <p class="mt"><%= form.label :password_confirmation %></p>
+      <p class='mt'><%= form.label :password_confirmation %></p>
       <p><%= form.password_field :password_confirmation, class: 'form-text-field' %></p>
 
-      <p class="mt-lg">
+      <p class='mt-lg'>
         <%= form.submit 'Save', class: 'button button-main' %>
-        <span class="text-sm">or <%= link_to 'back', :back %></span>
+        <span class='text-sm'>or <%= link_to 'back', :back %></span>
       </p>
     <% end %>
   </div>
 
-  <div class="mt-lg">
+  <div class='mt-lg'>
     <%= button_to 'Delete profile', user_path(@user),
       method: :delete,
       form: {data: {turbo_confirm: 'Are you sure you wanna delete your profile?'}},
