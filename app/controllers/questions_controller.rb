@@ -85,7 +85,7 @@ class QuestionsController < ApplicationController
   end
 
   def set_hashtags
-    @hashtags = Hashtag.order(:name).pluck(:name)
+    @hashtags = Hashtag.with_questions.order(:name).pluck(:name)
   end
 
   def check_captcha(model)
