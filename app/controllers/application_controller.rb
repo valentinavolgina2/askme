@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def redirect_with_alert
     redirect_to root_path, alert: 'Access denied!'
   end
+
+  def not_found
+    raise ActionController::RecordNotFound.new('Not Found')
+  end
 end
