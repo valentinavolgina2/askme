@@ -23,6 +23,10 @@ a.hidden {
   -webkit-text-fill-color: transparent;
 }
 
+.title-xxl {
+  font-size: 400%;
+}
+
 .title-lg {
   font-size: 175%;
 }

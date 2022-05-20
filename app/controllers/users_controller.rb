@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by(nickname: params[:nickname]) || not_found
+    @user = User.find_by(nickname: params[:nickname]) || error_404
   end
 
   def authorize_user
