@@ -2,9 +2,6 @@
 
 **Ask Me** is a Ruby on Rails web application that enables registered users to ask questions and receive answers from other users. Users can only answer questions addressed to them, and they have the ability to manage their received questions by editing, deleting, or hiding them.
 
-## Live Demo
-The project is deployed on Heroku and can be accessed at: [Ask Me](https://ask-valentina.herokuapp.com/)
-
 ---
 
 ## Features
